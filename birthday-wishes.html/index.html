@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy 18th Birthday Srija</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #ffc0cb, #ffb6c1, #ff69b4);
+      font-family: 'Arial', sans-serif;
+      color: #8b0000;
+      text-align: center;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    /* Floating hearts */
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      z-index: 1;
+      pointer-events: none;
+    }
+    
+    .emoji-heart {
+      position: absolute;
+      animation: float-down 6s linear infinite;
+      width: max-content;
+      white-space: nowrap;
+      z-index: 1;
+      font-size: 24px;
+    }
+    
+    .love-text {
+      position: absolute;
+      font-size: 1.2em;
+      color: #d80032;
+      font-weight: bold;
+      animation: float-text 8s linear infinite;
+      white-space: nowrap;
+      z-index: 1;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+    }
+    
+    @keyframes float-down {
+      0% { transform: translateY(-10%) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+    
+    @keyframes float-text {
+      0% { transform: translateY(-10%) translateX(-50%); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(110vh) translateX(-50%); opacity: 0; }
+    }
+    
+    .header {
+      margin: 20px 0;
+      position: relative;
+      z-index: 10;
+    }
+    
+    h1 {
+      font-size: 2.2rem;
+      color: #d80032;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+      margin-bottom: 15px;
+      font-family: 'Dancing Script', cursive;
+    }
+    
+    .slideshow-container {
+      width: 100%;
+      max-width: 500px;
+      position: relative;
+      margin: 0 auto;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      z-index: 10;
+    }
+    
+    .slide-wrapper {
+      position: relative;
+      width: 100%;
+      height: 60vh;
+      max-height: 500px;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    
+    .mySlides {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+    
+    .mySlides.active {
+      opacity: 1;
+    }
+    
+    .mySlides img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.8);
+      color: #d80032;
+      padding: 12px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      font-family: 'Dancing Script', cursive;
+    }
+    
+    .dot-container {
+      display: flex;
+      justify-content: center;
+      padding: 15px 0;
+      gap: 8px;
+    }
+    
+    .dot {
+      cursor: pointer;
+      height: 12px;
+      width: 12px;
+      background-color: #ffb6c1;
+      border-radius: 50%;
+      transition: background-color 0.6s ease;
+    }
+    
+    .dot.active {
+      background-color: #d80032;
+    }
+    
+    /* Additional messages section */
+    .messages {
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 20px;
+      padding: 20px;
+      margin: 30px 0;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 10;
+    }
+    
+    .message {
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #5a3e36;
+    }
+    
+    .signature {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.5rem;
+      color: #d80032;
+      margin-top: 15px;
+    }
+    
+    /* Voice message section */
+    .voice-message {
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 20px;
+      padding: 20px;
+      margin: 20px 0;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 10;
+    }
+    
+    .voice-message h2 {
+      color: #d80032;
+      margin-bottom: 15px;
+      font-family: 'Dancing Script', cursive;
+    }
+    
+    .audio-player {
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+    
+    audio {
+      width: 100%;
+    }
+    
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      .slide-wrapper {
+        height: 50vh;
+      }
+      
+      .caption {
+        font-size: 1rem;
+        padding: 8px;
+      }
+      
+      .dot {
+        height: 10px;
+        width: 10px;
+      }
+      
+      .message {
+        font-size: 1rem;
+      }
+      
+      .signature {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating hearts container -->
+  <div class="hearts" id="topHearts"></div>
+  <div class="hearts" id="loveTexts"></div>
+  
+  <div class="header">
+    <h1>Happy 18th Birthday to You Srija💓💗</h1>
+  </div>
+  
+  <div class="slideshow-container">
+    <div class="slide-wrapper">
+      <!-- Slides will be inserted here by JavaScript -->
+    </div>
+    <div class="dot-container">
+      <!-- Dots will be inserted here by JavaScript -->
+    </div>
+  </div>
+  
+  <!-- Additional messages section -->
+  <div class="messages">
+    <div class="message">
+      Jaan💓💗.. Dekho ami tumar legya eto pyar se eto ador e eto koshto koira aita banaisi. Toh amr ai surprise e jodi tumi olpo happy hou... Jodi amr ai surprise e
+      jodi tumar mukhe olpo smile aileo onek happy.. Kintu ami kemne bhujum je tumar aita bhalo lagse ki na..
+    </div>
+    
+    <div class="message">
+      Toh Jaan tai ami kichu chai tumar kaas thekya kichu chai.. Akhon Shuno
+      <br>
+      1. Jodi tumar ekdom bhalo lage nai taile amare khali message e koio "Bhalo lagse"
+      <br>
+      2. Jodi tumar normal bhalo lagse taile amare message koio je "Onek bhalo hoise"
+      <br>
+      3. Jodi tumar normal thekya ektu beshi bhalo lagse taile amare message e koio je "I Love you Swarup bake ja love you koile koio" r koio "Onek onekei bhalo hoise"
+      <br>
+      4. Jodi tumar onek onek bhalo lagse ekdom onek bhalo lagse taile amare Voice Message e koite lagbo je "Age toh koio je kirokom lagse pore I Love you"
+      <br>
+      Ar jodi voice message na aise taile ami bhabum je bhalo lage nai..
+    </div>
+    
+    <div class="message">
+      Jaan💓💗 ami onek bhalo pai tumare... Ami tumare amr family r member mani.. Ami tai tumare onek onek bhalo pai amr jaan tumi... Ar ami life e kaur legya eto kichu korsi 
+      so i hope you like it... Lastly Happy 18th Birthday to You... 
+      <br>
+      I Love You Srija💓💗
+    </div>
+    
+    
+    <div class="signature">
+      Forever yours,<br>Your Life long Life-Partner,<br> Your's Swarup
+    </div>
+  </div>
+
+  <!-- Voice message section -->
+  <div class="voice-message">
+  <h2>A Special Voice Message For You</h2>
+  <div class="audio-player">
+    <audio controls>
+      <source src="https://github.com/arsw26/Happy-Birthday-Srija/raw/main/birthday-wishes.html/song.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+  <p style="margin-top: 15px; color: #5a3e36;">Click play to hear my special birthday message for you!</p>
+</div>
+
+  <script>
+    // Photo data
+    const photos = [
+      { src: "https://github.com/arsw26/Happy-Birthday-Srija/raw/main/birthday-wishes.html/images/photoA.jpg", caption: "My Beautiful Jaan💓💗" },
+      { src: "https://github.com/arsw26/Happy-Birthday-Srija/raw/main/birthday-wishes.html/images/photoB.jpg", caption: "I Love You💓💗" },
+      { src: "https://github.com/arsw26/Happy-Birthday-Srija/raw/main/birthday-wishes.html/images/photoC.jpg", caption: "You're My Everything💓💗" },
+      { src: "https://github.com/arsw26/Happy-Birthday-Srija/raw/main/birthday-wishes.html/images/photoD.jpg", caption: "I Love You Srija💓💗" },
+      { src: "https://github.com/arsw26/Happy-Birthday-Srija/raw/main/birthday-wishes.html/images/photoE.jpg", caption: "My Love💓💗" },
+      { src: "https://github.com/arsw26/Happy-Birthday-Srija/raw/main/birthday-wishes.html/images/photoF.jpg", caption: "Forever Yours--💓💗" }
+    ];
+
+    // Initialize slideshow
+    const slideWrapper = document.querySelector('.slide-wrapper');
+    const dotContainer = document.querySelector('.dot-container');
+    let currentSlide = 0;
+
+    // Create slides and dots
+    photos.forEach((photo, index) => {
+      // Create slide
+      const slide = document.createElement('div');
+      slide.className = 'mySlides';
+      slide.innerHTML = `
+        <img src="${photo.src}" alt="Birthday photo ${index + 1}" loading="lazy">
+        <div class="caption">${photo.caption}</div>
+      `;
+      slideWrapper.appendChild(slide);
+
+      // Create dot
+      const dot = document.createElement('span');
+      dot.className = 'dot';
+      dot.addEventListener('click', () => goToSlide(index));
+      dotContainer.appendChild(dot);
+    });
+
+    // Show first slide
+    const slides = document.querySelectorAll('.mySlides');
+    const dots = document.querySelectorAll('.dot');
+    slides[0].classList.add('active');
+    dots[0].classList.add('active');
+
+    // Auto-rotate slides
+    function nextSlide() {
+      goToSlide((currentSlide + 1) % photos.length);
+    }
+
+    function goToSlide(index) {
+      slides[currentSlide].classList.remove('active');
+      dots[currentSlide].classList.remove('active');
+      
+      currentSlide = index;
+      
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+    }
+
+    // Change slide every 5 seconds
+    setInterval(nextSlide, 5000);
+
+    // Handle swipe for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    slideWrapper.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, false);
+
+    slideWrapper.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, false);
+
+    function handleSwipe() {
+      if (touchEndX < touchStartX - 50) {
+        nextSlide(); // Swipe left
+      }
+      if (touchEndX > touchStartX + 50) {
+        goToSlide((currentSlide - 1 + photos.length) % photos.length); // Swipe right
+      }
+    }
+
+    // Create floating hearts
+    function createHearts() {
+      const topHearts = document.getElementById("topHearts");
+      const loveTexts = document.getElementById("loveTexts");
+      
+      // Create 20 floating hearts
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement("div");
+        heart.className = "emoji-heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = `${Math.random() * 100}vw`;
+        heart.style.animationDuration = `${4 + Math.random() * 6}s`;
+        heart.style.fontSize = `${16 + Math.random() * 24}px`;
+        heart.style.top = `-${Math.random() * 100}px`;
+        topHearts.appendChild(heart);
+      }
+      
+      // Create 5 floating love texts
+      for (let i = 0; i < 5; i++) {
+        const text = document.createElement("div");
+        text.className = "love-text";
+        text.innerText = "I Love You Srija 💖";
+        text.style.left = `${Math.random() * 100}vw`;
+        text.style.animationDuration = `${8 + Math.random() * 5}s`;
+        text.style.animationDelay = `${Math.random() * 5}s`;
+        loveTexts.appendChild(text);
+      }
+    }
+    
+    // Initialize floating elements
+    createHearts();
+  </script>
+</body>
+</html>
